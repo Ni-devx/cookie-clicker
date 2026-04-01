@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Cookie Clicker Timer",
+  "version": "1.0",
+  "permissions": [
+    "sidePanel",
+    "notifications",
+    "storage",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Cookie Clicker Timer Pro"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "commands": {
+    "open-side-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Open Cookie Clicker Timer"
+    }
+  }
+}

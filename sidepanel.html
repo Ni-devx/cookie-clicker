@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Cookie Clicker Timer Pro</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">
+      <span class="cookie-spin">🍪</span>
+      COOKIE TIMER PRO
+    </div>
+  </div>
+
+  <div class="panel">
+    <!-- Input -->
+    <div class="section">
+      <div class="sec-title">🎮 Input</div>
+      <div class="irow">
+        <span class="ilabel">Current</span>
+        <div class="ifield">
+          <input type="number" id="current" placeholder="0" step="any" min="0" />
+          <div class="dd-wrap" id="dd-currentUnit"></div>
+        </div>
+      </div>
+      <div class="irow">
+        <span class="ilabel">Target</span>
+        <div class="ifield">
+          <input type="number" id="target" placeholder="0" step="any" min="0" />
+          <div class="dd-wrap" id="dd-targetUnit"></div>
+        </div>
+      </div>
+      <div class="irow">
+        <span class="ilabel">CPS</span>
+        <div class="ifield">
+          <input type="number" id="cps" placeholder="0" step="any" min="0" />
+          <div class="dd-wrap" id="dd-cpsUnit"></div>
+        </div>
+      </div>
+      <div id="errBox" class="err-box"></div>
+      <button id="btn-calc" class="btn-calc">⚡ Calculate</button>
+    </div>
+
+    <!-- Result -->
+    <div class="section result-hidden" id="resultSection">
+      <div class="sec-title">⏱ Countdown</div>
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+      </div>
+      <div class="prog-labels">
+        <span id="progPct">0%</span>
+        <span id="progRem">--</span>
+      </div>
+      <div class="cd-grid">
+        <div class="cd-cell">
+          <span class="cd-num" id="cdD">00</span><span class="cd-lbl">Days</span>
+        </div>
+        <div class="cd-cell">
+          <span class="cd-num" id="cdH">00</span><span class="cd-lbl">Hours</span>
+        </div>
+        <div class="cd-cell">
+          <span class="cd-num" id="cdM">00</span><span class="cd-lbl">Mins</span>
+        </div>
+        <div class="cd-cell">
+          <span class="cd-num" id="cdS">00</span><span class="cd-lbl">Secs</span>
+        </div>
+      </div>
+      <div class="arrive-box">ETA: <span id="arriveTime">--</span></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="section">
+      <div class="sec-title">Settings</div>
+      <div class="tog-row">
+        <span>Notify on goal reached</span>
+        <label class="tog">
+          <input type="checkbox" id="notifyToggle" />
+          <div class="tog-track"></div>
+          <div class="tog-thumb"></div>
+        </label>
+      </div>
+    </div>
+
+    <script src="sidepanel.js"></script>
+</body>
+
+</html>
