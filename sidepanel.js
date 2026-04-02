@@ -251,6 +251,9 @@ function refreshCD() {
   const total = (appSt.target - appSt.current) / appSt.cps;
 
   if (diff <= 0) {
+    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "";
+    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "";
+    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "none";
     ["cdD", "cdH", "cdM", "cdS"].forEach(
       (id) => (document.getElementById(id).textContent = "00"),
     );
@@ -270,24 +273,34 @@ function refreshCD() {
   }
 
   const s = Math.floor(diff / 1000);
-  document.getElementById("cdD").textContent = pad(Math.floor(s / 86400));
-  document.getElementById("cdH").textContent = pad(
-    Math.floor((s % 86400) / 3600),
-  );
-  document.getElementById("cdM").textContent = pad(Math.floor((s % 3600) / 60));
-  document.getElementById("cdS").textContent = pad(s % 60);
-  document.getElementById("arriveTime").textContent = new Date(
-    appSt.finishTs,
-  ).toLocaleString("en-US", { hour12: false });
+
+  if (s > 365 * 86400) {
+    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "none";
+    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "none";
+    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "block";
+  } else {
+    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "";
+    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "";
+    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "none";
+
+    document.getElementById("cdD").textContent = pad(Math.floor(s / 86400));
+    document.getElementById("cdH").textContent = pad(
+      Math.floor((s % 86400) / 3600),
+    );
+    document.getElementById("cdM").textContent = pad(Math.floor((s % 3600) / 60));
+    document.getElementById("cdS").textContent = pad(s % 60);
+    document.getElementById("arriveTime").textContent = new Date(
+      appSt.finishTs,
+    ).toLocaleString("en-US", { hour12: false });
+  }
 
   const elapsed = total - diff / 1000;
   const pct = Math.min(100, Math.max(0, (elapsed / total) * 100));
   setProg(pct, fmtDur(s) + " remaining");
 }
 
-function setProg(pct, label) {
+function setProg(pct) {
   document.getElementById("progPct").textContent = pct.toFixed(1) + "%";
-  document.getElementById("progRem").textContent = label;
 }
 
 function pad(n) {

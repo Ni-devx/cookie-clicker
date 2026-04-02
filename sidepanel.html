@@ -67,9 +67,9 @@
       </div>
       <div class="prog-labels">
         <span id="progPct">0%</span>
-        <span id="progRem">--</span>
       </div>
-      <div class="cd-grid">
+      <div id="tooLongBox" style="display: none; text-align: center; color: var(--danger); font-size: 18px; padding: 20px 0; font-family: 'Cinzel', serif; font-weight: bold;">Too long Time</div>
+      <div class="cd-grid" id="cdGrid">
         <div class="cd-cell">
           <span class="cd-num" id="cdD">00</span><span class="cd-lbl">Days</span>
         </div>
@@ -83,7 +83,7 @@
           <span class="cd-num" id="cdS">00</span><span class="cd-lbl">Secs</span>
         </div>
       </div>
-      <div class="arrive-box">ETA: <span id="arriveTime">--</span></div>
+      <div class="arrive-box" id="arriveBox">ETA: <span id="arriveTime">--</span></div>
     </div>
 
     <script src="sidepanel.js"></script>
