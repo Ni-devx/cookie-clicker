@@ -72,22 +72,7 @@ body {
 }
 
 .section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
   padding: 11px 13px;
-}
-
-.sec-title {
-  font-family: "Cinzel", serif;
-  font-size: 9.5px;
-  letter-spacing: 2px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .sec-title::after {
@@ -363,9 +348,6 @@ input[type="number"]:focus {
 }
 
 .cd-cell {
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 6px;
   padding: 7px 3px 5px;
   text-align: center;
 }
@@ -393,9 +375,6 @@ input[type="number"]:focus {
   font-size: 12.5px;
   color: var(--cream);
   text-align: center;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 6px;
   padding: 7px 10px;
 }
 
@@ -508,10 +487,12 @@ input[type="number"]:focus {
 
 .divider {
   height: 1px;
-  background: linear-gradient(to right,
-      transparent,
-      var(--border),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border),
+    transparent
+  );
   margin: 6px 0;
 }
 
@@ -545,7 +526,7 @@ input[type="number"]:focus {
   transition: background 0.2s;
 }
 
-.tog input:checked+.tog-track {
+.tog input:checked + .tog-track {
   background: var(--amber);
   border-color: var(--gold);
 }
@@ -563,7 +544,7 @@ input[type="number"]:focus {
     background 0.2s;
 }
 
-.tog input:checked~.tog-thumb {
+.tog input:checked ~ .tog-thumb {
   transform: translateX(16px);
   background: var(--gold-light);
 }
