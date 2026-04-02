@@ -11,19 +11,27 @@
 </head>
 
 <body>
-  <!-- HEADER -->
-  <div class="section">
-    <div class="tog-row">
-      <span>Notify on goal reached</span>
-      <label class="tog">
-        <input type="checkbox" id="notifyToggle" />
-        <div class="tog-track"></div>
-        <div class="tog-thumb"></div>
-      </label>
-    </div>
-  </div>
-
   <div class="panel">
+    <!-- Toggles -->
+    <div class="section">
+      <div class="tog-row" style="margin-bottom: 10px;">
+        <span>Dark Mode</span>
+        <label class="tog">
+          <input type="checkbox" id="themeToggle" checked />
+          <div class="tog-track"></div>
+          <div class="tog-thumb"></div>
+        </label>
+      </div>
+      <div class="tog-row">
+        <span>Notify on goal reached</span>
+        <label class="tog">
+          <input type="checkbox" id="notifyToggle" />
+          <div class="tog-track"></div>
+          <div class="tog-thumb"></div>
+        </label>
+      </div>
+    </div>
+
     <!-- Input -->
     <div class="section">
       <div class="irow">
@@ -48,8 +56,9 @@
         </div>
       </div>
       <div id="errBox" class="err-box"></div>
-      <button id="btn-calc" class="btn-calc">Calculate</button>
     </div>
+
+    <button id="btn-calc" class="btn-calc">Calculate</button>
 
     <!-- Result -->
     <div class="section result-hidden" id="resultSection">

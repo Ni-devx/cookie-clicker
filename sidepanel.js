@@ -324,6 +324,7 @@ function saveLocal() {
         s_target: appSt.target,
         s_cps: appSt.cps,
         notify: document.getElementById("notifyToggle").checked,
+        theme: document.body.getAttribute("data-theme") || "dark",
       }),
     );
   } catch (e) { }
@@ -359,6 +360,13 @@ function loadLocal() {
       renderGoals();
     }
     if (d.notify) document.getElementById("notifyToggle").checked = d.notify;
+    if (d.theme === 'light') {
+      document.getElementById('themeToggle').checked = false;
+      document.body.setAttribute('data-theme', 'light');
+    } else {
+      document.getElementById('themeToggle').checked = true;
+      document.body.setAttribute('data-theme', 'dark');
+    }
     if (d.finishTs && d.finishTs > Date.now()) {
       appSt.finishTs = d.finishTs;
       appSt.current = d.s_current || 0;
@@ -386,6 +394,12 @@ function renderGoals() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('themeToggle')?.addEventListener('change', (e) => {
+    if (e.target.checked) document.body.setAttribute('data-theme', 'dark');
+    else document.body.setAttribute('data-theme', 'light');
+    saveLocal();
+  });
+
   document.getElementById('btn-calc')?.addEventListener('click', calculate);
   document.getElementById('notifyToggle')?.addEventListener('change', (e) => {
     saveLocal();
@@ -394,4 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
       else chrome.alarms.clear("cookieTimer");
     }
   });
+
+  setInterval(() => {
+    if (appSt.finishTs) {
+      refreshCD();
+    }
+  }, 1000);
 });
