@@ -197,7 +197,14 @@ function startProgAnim() {
 // ══════════════════════════════════════════════
 //  APP STATE
 // ══════════════════════════════════════════════
-let appSt = { current: 0, target: 0, cps: 0, finishTs: null, goals: [], notified: false };
+let appSt = {
+  current: 0,
+  target: 0,
+  cps: 0,
+  finishTs: null,
+  goals: [],
+  notified: false,
+};
 
 function numFor(inputId, ddId) {
   const n = parseFloat(document.getElementById(inputId).value) || 0;
@@ -251,9 +258,12 @@ function refreshCD() {
   const total = (appSt.target - appSt.current) / appSt.cps;
 
   if (diff <= 0) {
-    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "";
-    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "";
-    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "none";
+    if (document.getElementById("cdGrid"))
+      document.getElementById("cdGrid").style.display = "";
+    if (document.getElementById("arriveBox"))
+      document.getElementById("arriveBox").style.display = "";
+    if (document.getElementById("tooLongBox"))
+      document.getElementById("tooLongBox").style.display = "none";
     ["cdD", "cdH", "cdM", "cdS"].forEach(
       (id) => (document.getElementById(id).textContent = "00"),
     );
@@ -262,10 +272,12 @@ function refreshCD() {
     if (!appSt.notified) {
       appSt.notified = true;
       if (document.getElementById("notifyToggle").checked) {
-        chrome.runtime.sendMessage({
-          type: "notify",
-          text: "目標のクッキー数に到達しました！"
-        }).catch((err) => console.error("Notification send error:", err));
+        chrome.runtime
+          .sendMessage({
+            type: "notify",
+            text: "目標のクッキー数に到達しました！",
+          })
+          .catch((err) => console.error("Notification send error:", err));
       }
     }
 
@@ -275,19 +287,27 @@ function refreshCD() {
   const s = Math.floor(diff / 1000);
 
   if (s > 10 * 365 * 86400) {
-    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "none";
-    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "none";
-    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "block";
+    if (document.getElementById("cdGrid"))
+      document.getElementById("cdGrid").style.display = "none";
+    if (document.getElementById("arriveBox"))
+      document.getElementById("arriveBox").style.display = "none";
+    if (document.getElementById("tooLongBox"))
+      document.getElementById("tooLongBox").style.display = "block";
   } else {
-    if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "";
-    if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "";
-    if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "none";
+    if (document.getElementById("cdGrid"))
+      document.getElementById("cdGrid").style.display = "";
+    if (document.getElementById("arriveBox"))
+      document.getElementById("arriveBox").style.display = "";
+    if (document.getElementById("tooLongBox"))
+      document.getElementById("tooLongBox").style.display = "none";
 
     document.getElementById("cdD").textContent = pad(Math.floor(s / 86400));
     document.getElementById("cdH").textContent = pad(
       Math.floor((s % 86400) / 3600),
     );
-    document.getElementById("cdM").textContent = pad(Math.floor((s % 3600) / 60));
+    document.getElementById("cdM").textContent = pad(
+      Math.floor((s % 3600) / 60),
+    );
     document.getElementById("cdS").textContent = pad(s % 60);
     document.getElementById("arriveTime").textContent = new Date(
       appSt.finishTs,
@@ -340,7 +360,7 @@ function saveLocal() {
         theme: document.body.getAttribute("data-theme") || "dark",
       }),
     );
-  } catch (e) { }
+  } catch (e) {}
 }
 
 function loadLocal() {
@@ -373,12 +393,12 @@ function loadLocal() {
       renderGoals();
     }
     if (d.notify) document.getElementById("notifyToggle").checked = d.notify;
-    if (d.theme === 'light') {
-      document.getElementById('themeToggle').checked = false;
-      document.body.setAttribute('data-theme', 'light');
+    if (d.theme === "light") {
+      document.getElementById("themeToggle").checked = false;
+      document.body.setAttribute("data-theme", "light");
     } else {
-      document.getElementById('themeToggle').checked = true;
-      document.body.setAttribute('data-theme', 'dark');
+      document.getElementById("themeToggle").checked = true;
+      document.body.setAttribute("data-theme", "dark");
     }
     if (d.finishTs && d.finishTs > Date.now()) {
       appSt.finishTs = d.finishTs;
@@ -391,7 +411,7 @@ function loadLocal() {
       refreshCD();
       startProgAnim();
     }
-  } catch (e) { }
+  } catch (e) {}
 }
 
 // ══════════════════════════════════════════════
@@ -406,18 +426,19 @@ function renderGoals() {
   // Empty stub to prevent ReferenceErrors from setInterval and loadLocal
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('themeToggle')?.addEventListener('change', (e) => {
-    if (e.target.checked) document.body.setAttribute('data-theme', 'dark');
-    else document.body.setAttribute('data-theme', 'light');
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("themeToggle")?.addEventListener("change", (e) => {
+    if (e.target.checked) document.body.setAttribute("data-theme", "dark");
+    else document.body.setAttribute("data-theme", "light");
     saveLocal();
   });
 
-  document.getElementById('btn-calc')?.addEventListener('click', calculate);
-  document.getElementById('notifyToggle')?.addEventListener('change', (e) => {
+  document.getElementById("btn-calc")?.addEventListener("click", calculate);
+  document.getElementById("notifyToggle")?.addEventListener("change", (e) => {
     saveLocal();
     if (appSt.finishTs && appSt.finishTs > Date.now()) {
-      if (e.target.checked) chrome.alarms.create("cookieTimer", { when: appSt.finishTs });
+      if (e.target.checked)
+        chrome.alarms.create("cookieTimer", { when: appSt.finishTs });
       else chrome.alarms.clear("cookieTimer");
     }
   });

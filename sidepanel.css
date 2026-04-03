@@ -539,7 +539,7 @@ input[type="number"]:focus {
   transition: background 0.2s;
 }
 
-.tog input:checked+.tog-track {
+.tog input:checked + .tog-track {
   background: var(--amber);
   border-color: var(--gold);
 }
@@ -557,7 +557,7 @@ input[type="number"]:focus {
     background 0.2s;
 }
 
-.tog input:checked~.tog-thumb {
+.tog input:checked ~ .tog-thumb {
   transform: translateX(16px);
   background: var(--gold-light);
 }

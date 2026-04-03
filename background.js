@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       title: "Cookie Clicker",
       message: "目標のクッキー数に到達しました！",
       priority: 2,
-      requireInteraction: true
+      requireInteraction: true,
     });
   }
 });
