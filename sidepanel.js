@@ -274,7 +274,7 @@ function refreshCD() {
 
   const s = Math.floor(diff / 1000);
 
-  if (s > 365 * 86400) {
+  if (s > 10 * 365 * 86400) {
     if (document.getElementById("cdGrid")) document.getElementById("cdGrid").style.display = "none";
     if (document.getElementById("arriveBox")) document.getElementById("arriveBox").style.display = "none";
     if (document.getElementById("tooLongBox")) document.getElementById("tooLongBox").style.display = "block";
